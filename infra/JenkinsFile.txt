@@ -1,0 +1,37 @@
+﻿def builtDockerImage
+
+
+
+pipeline {
+    agent any
+    
+   stages {
+        stage('Clone repo') {
+            steps {
+                git url: 'https://github.com/ManankGupta1509/jenkin-assignment.git', branch: 'main'
+            }
+        }
+
+
+
+       stage('Build image') {
+            steps {
+                script {
+                    builtDockerImage = docker.build "manank159/image-through-jenkins:v1.0"
+                }
+            }
+        }
+        
+        
+        stage('Push image') {
+            steps {
+                script {
+                        docker.withRegistry('', 'dockerhub-cred-manank') {
+                        
+                            builtDockerImage.push()
+                        }
+                }
+            }
+        }
+    }
+}
