@@ -1,16 +1,13 @@
-﻿def builtDockerImage
-
-pipeline {
+﻿pipeline {
     agent any
-    
+    def builtDockerImage
+
    stages {
         stage('Clone repo') {
             steps {
                 git url: 'https://github.com/ManankGupta1509/jenkin-assignment.git', branch: 'main'
             }
         }
-
-
 
        stage('Build image') {
             steps {
@@ -19,13 +16,11 @@ pipeline {
                 }
             }
         }
-        
-        
+       
         stage('Push image') {
             steps {
                 script {
                         docker.withRegistry('', 'dockerhub-cred-manank') {
-                        
                             builtDockerImage.push()
                         }
                 }
