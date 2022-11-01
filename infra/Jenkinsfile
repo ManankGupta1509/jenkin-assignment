@@ -1,7 +1,5 @@
 ﻿def builtDockerImage
 
-
-
 pipeline {
     agent any
     
