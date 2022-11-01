@@ -1,9 +1,10 @@
-﻿pipeline {
-    agent any
-    def builtDockerImage
+﻿def builtDockerImage
 
-   stages {
-        stage('Clone repo') {
+pipeline{
+  agent any
+
+  stages{
+	stage('Clone repo') {
             steps {
                 git url: 'https://github.com/ManankGupta1509/jenkin-assignment.git', branch: 'main'
             }
